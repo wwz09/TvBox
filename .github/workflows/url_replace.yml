@@ -14,7 +14,8 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
-          token: ${{ secrets.PAT }}  # 需要设置一个具有仓库写权限的PAT
+          # token参数设为可选，当secrets.PAT存在时使用，否则使用默认token
+          token: ${{ secrets.PAT || github.token }}
       
       - name: 设置Git用户信息
         run: |
