@@ -5,6 +5,8 @@ on:
     branches: [ main ]
     paths: [ 'XC.json' ]
   workflow_dispatch:  # 允许手动触发
+  repository_dispatch:  # 允许通过API触发，适用于上游同步后
+    types: [ sync_upstream ]
 
 # 授予工作流写入内容的权限
 permissions:
@@ -23,6 +25,12 @@ jobs:
         run: |
           git config --local user.name "wwz09"
           git config --local user.email "wwz5124@gmail.com"
+      
+      - name: 确保工作目录干净
+        run: |
+          # 清理任何可能的本地修改，确保在干净状态下操作
+          git reset --hard HEAD
+          git clean -fd
       
       - name: 执行URL替换
         run: |
@@ -44,8 +52,23 @@ jobs:
       
       - name: 提交更改
         run: |
+          # 检查是否有更改需要提交
+          if git diff --exit-code XC.json; then
+            echo "没有检测到需要替换的URL，跳过提交。"
+            exit 0
+          fi
+          
           git add XC.json
           git commit -m "自动替换URL [skip ci]"
-          # 使用GitHub Actions默认的GITHUB_TOKEN进行推送
-          git push origin HEAD:main
-        if: contains(github.event.head_commit.message, '[skip replace]') == false
+          
+          # 尝试推送，如果失败则拉取最新代码后再次尝试
+          git push origin HEAD:main || (
+            echo "推送失败，尝试拉取最新代码..."
+            git pull --rebase origin main &&
+            git push origin HEAD:main
+          )
+        # 处理不同触发事件的条件
+        if: |
+          (contains(github.event_name, 'push') && contains(github.event.head_commit.message, '[skip replace]') == false) ||
+          github.event_name == 'workflow_dispatch' ||
+          github.event_name == 'repository_dispatch'
