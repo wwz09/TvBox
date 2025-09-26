@@ -10,32 +10,24 @@ jobs:
   replace-url:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3  # Gitea兼容此action
         with:
           persist-credentials: false
           fetch-depth: 0
-          token: ${{ secrets.PAT }}  # 需要设置一个具有仓库写权限的PAT
+          token: ${{ secrets.PAT }}  # 在Gitea中设置同名密钥
       
       - name: 设置Git用户信息
         run: |
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "wwz09 "
+          git config --local user.email "wwz09@163.com"
       
       - name: 执行URL替换
         run: |
-          # 定义要替换的URL正则表达式模式和替换为的内容
-          # 此正则表达式会匹配任何以raw.githubusercontent.com/yoursmile66/TVBox/refs/heads/main结尾的URL
           SEARCH_REGEX="https?://[^/]+/raw\.githubusercontent\.com/yoursmile66/TVBox/refs/heads/main"
           REPLACE_WITH="."
-          
-          # 备份原文件
           mkdir -p .backups
           cp XC.json .backups/XC.json.backup.$(date '+%Y%m%d%H%M%S')
-          
-          # 执行替换（使用-E选项启用扩展正则表达式）
           sed -i -E "s|$SEARCH_REGEX|$REPLACE_WITH|g" XC.json
-          
-          # 显示替换结果（使用-E选项启用扩展正则表达式）
           echo "替换前匹配数: $(grep -oE "$SEARCH_REGEX" .backups/XC.json.backup.* | wc -l)"
           echo "替换后匹配数: $(grep -oE "$SEARCH_REGEX" XC.json | wc -l)"
       
@@ -43,5 +35,5 @@ jobs:
         run: |
           git add XC.json
           git commit -m "自动替换URL [skip ci]"
-          git push https://x-access-token:${{ secrets.PAT }}@github.com/${{ github.repository }}.git HEAD:main
-        if: contains(github.event.head_commit.message, '[skip replace]') == false
+          git push https://$GITHUB_ACTOR:${{ secrets.PAT }}@your-gitea-instance.com/${{ gitea.repository }}.git HEAD:main
+        if: contains(gitea.event.head_commit.message, '[skip replace]') == false
