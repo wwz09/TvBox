@@ -18,8 +18,8 @@ jobs:
       
       - name: 设置Git用户信息
         run: |
-          git config --local user.name "wwz09 "
-          git config --local user.email "wwz09@163.com"
+           git config --global user.name "wwz09"
+           git config --global user.email "wwz5124@gmail.com"
       
       - name: 执行URL替换
         run: |
