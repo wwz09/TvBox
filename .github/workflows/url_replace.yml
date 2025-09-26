@@ -6,16 +6,18 @@ on:
     paths: [ 'XC.json' ]
   workflow_dispatch:  # 允许手动触发
 
+# 授予工作流写入内容的权限
+permissions:
+  contents: write
+
 jobs:
   replace-url:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
-          persist-credentials: false
+          persist-credentials: true  # 保持凭据以便后续push操作
           fetch-depth: 0
-          # token参数设为可选，当secrets.PAT存在时使用，否则使用默认token
-          token: ${{ secrets.PAT || github.token }}
       
       - name: 设置Git用户信息
         run: |
