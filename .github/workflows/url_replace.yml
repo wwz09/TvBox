@@ -44,5 +44,6 @@ jobs:
         run: |
           git add XC.json
           git commit -m "自动替换URL [skip ci]"
-          git push https://x-access-token:${{ secrets.PAT }}@github.com/${{ github.repository }}.git HEAD:main
+          # 使用GitHub Actions默认的GITHUB_TOKEN进行推送
+          git push origin HEAD:main
         if: contains(github.event.head_commit.message, '[skip replace]') == false
