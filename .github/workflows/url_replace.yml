@@ -35,8 +35,8 @@ jobs:
       - name: 执行URL替换
         run: |
           # 定义要替换的URL正则表达式模式和替换为的内容
-          # 此正则表达式会匹配任何以raw.githubusercontent.com/yoursmile66/TVBox/refs/heads/main结尾的URL
-          SEARCH_REGEX="https?://[^/]+/raw\.githubusercontent\.com/yoursmile66/TVBox/refs/heads/main"
+          # 此正则表达式会匹配任何域名，只要其路径包含yoursmile66/TVBox/refs/heads/main
+          SEARCH_REGEX="https?://[^/]+/yoursmile66/TVBox/refs/heads/main"
           REPLACE_WITH="."
           
           # 备份原文件
