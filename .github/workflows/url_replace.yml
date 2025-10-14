@@ -35,8 +35,8 @@ jobs:
       - name: 执行URL替换
         run: |
           # 定义要替换的URL正则表达式模式和替换为的内容
-          # 此正则表达式会匹配任何域名，只要其路径包含yoursmile66/TVBox/refs/heads/main
-          SEARCH_REGEX="https?://[^/]+/yoursmile66/TVBox/refs/heads/main"
+          # 简化的正则表达式，专注于匹配路径部分，能处理多级域名
+          SEARCH_REGEX="https?://[a-zA-Z0-9.-]+(/[a-zA-Z0-9.-]+)*/yoursmile66/TVBox/main"
           REPLACE_WITH="."
           
           # 备份原文件
