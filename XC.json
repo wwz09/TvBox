@@ -50,6 +50,7 @@
 {"name":"☕韩剧","key":"Hxq","type":3,"api":"csp_HxqAmns","searchable":1,"filterable":1,"quickSearch":1,"changeable":1,"jar":"https://jihulab.com/yoursmile2/TVBox/-/raw/main/custom_spider.jar"},
 {"key":"聚合短剧","name":"🈴聚合短剧","type":3,"api":"csp_JuheShortDrama","searchable":1,"filterable":0,"switchable":0,"ext":{"host":{"锦鲤":"https://api.jinlidj.com","番茄":"https://reading.snssdk.com","番茄2":"https://fqgo.52dns.cc","星芽":"https://app.whjzjx.cn","星芽登录":"https://u.shytkjgs.com","西饭":"https://xifan-api-cn.youlishipin.com"},"commonConfig":"./json/peizhi.json"}},
 {"name":"🍉找短剧","key":"找短剧","type":3,"api":"csp_HgggAmns","indexs":1,"searchable":0,"filterable":0,"quickSearch":0,"changeable":0,"jar":"https://jihulab.com/yoursmile2/TVBox/-/raw/main/custom_spider.jar"},
+{"name":"🍩甜圈短剧","key":"甜圈短剧","type":3,"api":"csp_TQdjAmns","searchable":1,"filterable":1,"quickSearch":1,"changeable":1,"jar":"https://jihulab.com/yoursmile2/TVBox/-/raw/main/custom_spider.jar"},
 {"name":"🎦豪堪短剧","key":"豪堪短剧","type":3,"api":"csp_HHkkAmns","searchable":1,"filterable":1,"quickSearch":1,"changeable":1,"jar":"https://jihulab.com/yoursmile2/TVBox/-/raw/main/custom_spider.jar"},
 {"name":"📺盒马短剧","key":"盒马短剧","type":3,"api":"csp_HemaAmns","searchable":1,"filterable":1,"quickSearch":1,"changeable":1,"jar":"https://jihulab.com/yoursmile2/TVBox/-/raw/main/custom_spider.jar"},
 {"name":"🎞️拜拜短剧","key":"拜拜短剧","type":3,"api":"csp_BddjAmns","searchable":1,"filterable":1,"quickSearch":1,"changeable":1,"jar":"https://jihulab.com/yoursmile2/TVBox/-/raw/main/custom_spider.jar"},
